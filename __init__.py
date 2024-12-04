@@ -13,7 +13,7 @@ bl_info = {
 }
 
 # List of modules making up the addon
-module_names = ("user_interface",)
+module_names = ("user_interface", "operators", "properties")
 modules = []
 
 for mod in module_names:
