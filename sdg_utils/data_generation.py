@@ -7,9 +7,9 @@ from . import my_common
 
 
 #render related
-num_renders = 5
-min_num_objects = 1
-max_num_objects = 3
+num_renders = 0
+min_num_objects = 0
+max_num_objects = 0
 output_dir = ""
 
 #object positioning related
@@ -21,9 +21,17 @@ drop_height = 200
 final_frame = 50
 
 
-def generate_data(output, generate_count):
+def generate_data(output, generate_count, min_object_count, max_object_count):
+    #TODO: maybe make it into a class...
     global output_dir
     output_dir = output
+
+    global min_num_objects
+    min_num_objects = min_object_count
+
+    global max_num_objects
+    max_num_objects = max_object_count
+
     print(output)
     print("[Started: Data generation]")
     #this is needed so I don't have to call the import_tools function everytime when i restart the script

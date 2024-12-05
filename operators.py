@@ -40,10 +40,12 @@ class SDG_OT_generate_data(bpy.types.Operator):
 
 
         generate_count = context.scene.sdg_properties.generate_count
-
+        min_object_count = context.scene.sdg_properties.min_object_count
+        max_object_count = context.scene.sdg_properties.min_object_count
+        
         current_dir_path = os.path.dirname(os.path.realpath(__file__))
         self.report({'INFO'}, "Generate data button clicked!")
-        data_generation.generate_data(current_dir_path, generate_count)
+        data_generation.generate_data(output=current_dir_path, generate_count=generate_count, min_object_count=min_object_count, max_object_count=max_object_count)
         return {'FINISHED'}
 
 # ==============================================================================

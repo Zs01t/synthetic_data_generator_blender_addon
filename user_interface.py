@@ -30,9 +30,19 @@ class SDG_PT_Panel(bpy.types.Panel):
         # Data generation box
         box = layout.box()
         box.label(text='Generate Data')
+
         row = box.row(align=True)
         row.label(text='Amount to generate')
         row.prop(context.scene.sdg_properties, 'generate_count', text='')
+
+        row = box.row(align=True)
+        row.label(text='Maximum amount of objects')
+        row.prop(context.scene.sdg_properties, 'max_object_count', text='')
+
+        row = box.row(align=True)
+        row.label(text='Minimum amount of objects')
+        row.prop(context.scene.sdg_properties, 'min_object_count', text='')
+
         row = box.row(align=True)
         row.operator('sdg.generate_data', text='Generate data')
 
