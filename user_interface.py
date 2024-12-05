@@ -31,6 +31,9 @@ class SDG_PT_Panel(bpy.types.Panel):
         box = layout.box()
         box.label(text='Generate Data')
         row = box.row(align=True)
+        row.label(text='Amount to generate')
+        row.prop(context.scene.sdg_properties, 'generate_count', text='')
+        row = box.row(align=True)
         row.operator('sdg.generate_data', text='Generate data')
 
 # ==============================================================================
@@ -46,7 +49,7 @@ def register() -> None:
 
 
 def unregister() -> None:
-    for cls in classes:
+    for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
 
 if __name__ == "__main__":

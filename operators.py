@@ -37,9 +37,13 @@ class SDG_OT_generate_data(bpy.types.Operator):
     bl_options = {'REGISTER'}
     
     def execute(self, context: Context):
+
+
+        generate_count = context.scene.sdg_properties.generate_count
+
         current_dir_path = os.path.dirname(os.path.realpath(__file__))
         self.report({'INFO'}, "Generate data button clicked!")
-        data_generation.generate_data(current_dir_path)
+        data_generation.generate_data(current_dir_path, generate_count)
         return {'FINISHED'}
 
 # ==============================================================================
@@ -56,7 +60,7 @@ def register() -> None:
         bpy.utils.register_class(cls)
 
 def unregister() -> None:
-    for cls in classes:
+    for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
 
 

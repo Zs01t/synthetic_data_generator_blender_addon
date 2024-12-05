@@ -21,7 +21,7 @@ drop_height = 200
 final_frame = 50
 
 
-def generate_data(output):
+def generate_data(output, generate_count):
     global output_dir
     output_dir = output
     print(output)
@@ -37,7 +37,7 @@ def generate_data(output):
 
     current_iteration = len([f for f in os.listdir(os.path.join(output_dir, "renders")) if f.startswith("render_") and f.endswith(".png")])
 
-    for i in range(current_iteration, num_renders):
+    for i in range(current_iteration, generate_count):
         selected_objects = select_random_objects()
         duplicated_objects = duplicate_objects(selected_objects)
 
