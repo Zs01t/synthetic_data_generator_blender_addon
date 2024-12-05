@@ -97,7 +97,7 @@ def setup_scene():
         print("Default light source not found.")
 
     setup_plane_physics()
-
+    bpy.ops.bat.generate_distortion_map()
     print("[Ended: Setting up the scene]\n")
 
 
