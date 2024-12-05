@@ -147,7 +147,7 @@ def get_or_create_collection(name):
         bpy.context.scene.collection.children.link(new_collection)
         return new_collection
 
-def is_object_imported(self, base_name, collection_name):
+def is_object_imported(base_name, collection_name):
 
     # Function to strip Blender's numeric suffix (.001, .002)
     def strip_blender_suffix(name):

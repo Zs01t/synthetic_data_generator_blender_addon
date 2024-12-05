@@ -1,6 +1,7 @@
 import bpy
 from .sdg_utils import scene_setup, object_import, data_generation
 from bpy.types import Context
+import os
 
 class SDG_OT_setup_sdg_scene(bpy.types.Operator):
     bl_idname = 'sdg.setup_sdg_scene'
@@ -19,7 +20,9 @@ class SDG_OT_import_tools(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
     def execute(self, contect: Context):
-        object_import.import_tools()
+        current_dir_path = os.path.dirname(os.path.realpath(__file__))
+        tools_dir_path = os.path.join(current_dir_path, "sdg_utils", "misc", "tools_dir")
+        object_import.import_tools(tools_dir=tools_dir_path)
         self.report({'INFO'}, "Import tools button clicked!")
         return {'FINISHED'}
     
