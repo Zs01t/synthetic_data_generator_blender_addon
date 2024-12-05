@@ -1,5 +1,5 @@
 import bpy
-
+import os
 
 class SDG_Properties(bpy.types.PropertyGroup):
     
@@ -7,7 +7,7 @@ class SDG_Properties(bpy.types.PropertyGroup):
 
         if self.max_object_count < self.min_object_count:
             self.max_object_count = self.min_object_count
-            
+
         tools_collection = bpy.data.collections.get("Tools_reference")  
         if tools_collection:
             collection_count = len(tools_collection.children)
@@ -27,10 +27,18 @@ class SDG_Properties(bpy.types.PropertyGroup):
         else:
             self.max_object_count = 0
 
+    def browse_directory(self, context):
+        context.window_manager.fileselect_add(self)
+
+    def validate_directory(self, context):
+        if not os.path.isdir(self.output_directory):
+            self.report({'ERROR'}, "Invalid directory path. Please choose a valid folder.")
+            return False
+        return True
 
     generate_count: bpy.props.IntProperty(
         name="generate_count",
-        description="Number of images-mask pair to generate",
+        description="Number of image-mask pair to generate",
         default=3,
         min=1,
         max=2000
@@ -50,6 +58,12 @@ class SDG_Properties(bpy.types.PropertyGroup):
         min=1,
         max=2000,
         update=update_max_object_count
+    )
+    output_directory: bpy.props.StringProperty(
+        name="output_dir",
+        description="The output where the image-mask pair will be saved",
+        default="",
+        subtype='DIR_PATH'
     )
     
 

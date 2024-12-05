@@ -32,6 +32,10 @@ class SDG_PT_Panel(bpy.types.Panel):
         box.label(text='Generate Data')
 
         row = box.row(align=True)
+        row.label(text='Specify an output')
+        row.prop(context.scene.sdg_properties, 'output_directory', text='')
+
+        row = box.row(align=True)
         row.label(text='Amount to generate')
         row.prop(context.scene.sdg_properties, 'generate_count', text='')
 
