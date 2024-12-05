@@ -1,6 +1,8 @@
 import bpy
 import os
 import re
+from . import my_common
+
 
 def import_tools(tools_dir):
     print("[Started: Importing the tools]")
@@ -136,8 +138,7 @@ def import_tools(tools_dir):
             bpy.context.scene.bat_properties.surface_normal_generation = True
             bpy.context.scene.bat_properties.optical_flow_generation = True
     
-    duplicate_holder_collections = [collection for collection in bpy.data.collections if collection.name.startswith("duplicate_holder_")]
-    
+    my_common.set_duplicate_holder_collections([collection for collection in bpy.data.collections if collection.name.startswith("duplicate_holder_")]) 
     print("[Ended: Importing the tools]\n")
 
 def get_or_create_collection(name):

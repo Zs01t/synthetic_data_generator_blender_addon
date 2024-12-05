@@ -1,5 +1,14 @@
 
 
+# class SDGProperties(PropertyGroup):
+#     render_count: bpy.props.IntProperty(
+#         name="Render Count",
+#         description="Number of renders to generate",
+#         default=10,
+#         min=1,
+#         max=100
+#     )
+
 
 
 # ==============================================================================

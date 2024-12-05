@@ -1,5 +1,6 @@
 import bpy
-from bpy.types import Context, PropertyGroup
+from bpy.types import Context
+from . import operators
 
 class SDG_PT_Panel(bpy.types.Panel):
     bl_idname = 'VIEW_3D_PT_SDG_Panel'
@@ -10,7 +11,6 @@ class SDG_PT_Panel(bpy.types.Panel):
 
     def draw(self, context: Context) -> None:
         layout = self.layout
-        scene = context.scene
 
         # -------------------------------
         # Setup scene box
@@ -32,17 +32,6 @@ class SDG_PT_Panel(bpy.types.Panel):
         box.label(text='Generate Data')
         row = box.row(align=True)
         row.operator('sdg.generate_data', text='Generate data')
-
-
-# class SDGProperties(PropertyGroup):
-#     render_count: bpy.props.IntProperty(
-#         name="Render Count",
-#         description="Number of renders to generate",
-#         default=10,
-#         min=1,
-#         max=100
-#     )
-
 
 # ==============================================================================
 # SECTION: Register/Unregister
