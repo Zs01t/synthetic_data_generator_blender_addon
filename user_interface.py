@@ -12,8 +12,26 @@ class SDG_PT_Panel(bpy.types.Panel):
         layout = self.layout
         scene = context.scene
 
-        row = layout.row()
+        # -------------------------------
+        # Setup scene box
+        box = layout.box()
+        box.label(text='Setup scene')
+        row = box.row(align=True)
         row.operator('sdg.setup_sdg_scene', text='Setup scene')
+
+        # -------------------------------
+        # Import tools box
+        box = layout.box()
+        box.label(text='Import tools')
+        row = box.row(align=True)
+        row.operator('sdg.import_tools', text='Import tools')
+
+        # -------------------------------
+        # Data generation box
+        box = layout.box()
+        box.label(text='Generate Data')
+        row = box.row(align=True)
+        row.operator('sdg.generate_data', text='Generate data')
 
 
 # class SDGProperties(PropertyGroup):

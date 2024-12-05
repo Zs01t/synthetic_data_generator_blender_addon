@@ -12,13 +12,33 @@ class SDG_OT_setup_sdg_scene(bpy.types.Operator):
         self.report({'INFO'}, "Setup scene button clicked!")
         return {'FINISHED'}
 
+
+class SDG_OT_import_tools(bpy.types.Operator):
+    bl_idname = 'sdg.import_tools'
+    bl_label ='Import tools'
+    bl_options = {'REGISTER'}
+
+    def execute(self, contect: Context):
+        object_import.import_tools()
+        self.report({'INFO'}, "Import tools button clicked!")
+        return {'FINISHED'}
+    
+class SDG_OT_generate_data(bpy.types.Operator):
+    bl_idname = 'sdg.generate_data'
+    bl_label ='Generate data'
+    bl_options = {'REGISTER'}
+
+    def execute(self, contect: Context):
+        self.report({'INFO'}, "Generate data button clicked!")
+        return {'FINISHED'}
+
 # ==============================================================================
 # SECTION: Register/Unregister
 # ==============================================================================
 # Description: Make defined classes available in Blender
 
 classes = [
-    SDG_OT_setup_sdg_scene
+    SDG_OT_setup_sdg_scene, SDG_OT_import_tools, SDG_OT_generate_data
 ]
 
 def register() -> None:
