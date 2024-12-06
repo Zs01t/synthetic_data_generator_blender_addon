@@ -3,7 +3,7 @@ import os
 import math
 
 #TODO: Make this function modifiable; and make the other funtions "Plane" independent (data_generation, position objects randomizes the position based on the plane size)
-def setup_scene():
+def setup_scene(plane_texture_file):
     print("[Started: Setting up the scene]")
     bpy.context.scene.gravity = (0, 0, -2000)
     bpy.ops.object.select_all(action='DESELECT')
@@ -52,9 +52,7 @@ def setup_scene():
         texture_node.location = (-400, 0)
 
         # Load and assign an image texture
-        #TODO: Make This Dynamic
-        current_dir_path = os.path.dirname(os.path.realpath(__file__))
-        image_path = os.path.join(current_dir_path, "misc", "plane_texture.jpeg")
+        image_path = plane_texture_file
         image = bpy.data.images.load(image_path)
         texture_node.image = image
         # Connect the texture to the Principled BSDF

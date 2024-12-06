@@ -65,6 +65,24 @@ class SDG_Properties(bpy.types.PropertyGroup):
         default="",
         subtype='DIR_PATH'
     )
+    tools_directory: bpy.props.StringProperty(
+        name="tools_dir",
+        description="The folder which contains the models for automatic data generation",
+        default="",
+        subtype='DIR_PATH'
+    )
+    is_sample_models_present: bpy.props.BoolProperty(
+        name="is_sample_models_present",
+        description="If True, the it will generate texure nodes for the sample model set",
+        default=False
+    )
+
+    plane_texture_file: bpy.props.StringProperty(
+        name = "plane_texture_file",
+        description="The Plane's texture on which the object will be",
+        subtype= 'FILE_PATH',   
+    )
+
     
 
 

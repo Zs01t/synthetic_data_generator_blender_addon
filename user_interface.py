@@ -16,6 +16,11 @@ class SDG_PT_Panel(bpy.types.Panel):
         # Setup scene box
         box = layout.box()
         box.label(text='Setup scene')
+
+        row = box.row(align=True)
+        row.label(text='Plane texture')
+        row.prop(context.scene.sdg_properties, 'plane_texture_file', text='')
+        
         row = box.row(align=True)
         row.operator('sdg.setup_sdg_scene', text='Setup scene')
 

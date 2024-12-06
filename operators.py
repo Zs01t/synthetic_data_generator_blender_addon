@@ -7,13 +7,14 @@ class SDG_OT_setup_sdg_scene(bpy.types.Operator):
     bl_idname = 'sdg.setup_sdg_scene'
     bl_label = 'Setup SDG scene'
     bl_options = {'REGISTER'}
+    
+    
 
     def  execute(self, context: Context):
-        scene_setup.setup_scene()
+        plane_texture_file = context.scene.sdg_properties.plane_texture_file
+        scene_setup.setup_scene(plane_texture_file=plane_texture_file)
         self.report({'INFO'}, "Setup scene button clicked!")
         return {'FINISHED'}
-
-
 
 
 class SDG_OT_import_tools(bpy.types.Operator):
@@ -50,24 +51,24 @@ class SDG_OT_generate_data(bpy.types.Operator):
 
 
 
-class SDG_OT_browse_directory(bpy.types.Operator):
-    bl_idname = "sdg.browse_output_directory"
-    bl_label = "Browse Output Directory"
+# class SDG_OT_browse_directory(bpy.types.Operator):
+#     bl_idname = "sdg.browse_output_directory"
+#     bl_label = "Browse Output Directory"
 
-    def execute(self, context):
-        # Open the file browser to choose a directory
-        context.window_manager.fileselect_add(self)
-        return {'RUNNING_MODAL'}
+#     def execute(self, context):
+#         # Open the file browser to choose a directory
+#         context.window_manager.fileselect_add(self)
+#         return {'RUNNING_MODAL'}
 
-    def invoke(self, context, event):
-        # Ensure the current directory is shown in the file browser (optional)
-        self.filepath = context.scene.sdg_properties.output_directory
-        return self.execute(context)
+#     def invoke(self, context, event):
+#         # Ensure the current directory is shown in the file browser (optional)
+#         self.filepath = context.scene.sdg_properties.output_directory
+#         return self.execute(context)
 
-    def execute(self, context):
-        # Save the selected directory path
-        context.scene.sdg_properties.output_directory = self.filepath
-        return {'FINISHED'}
+#     def execute(self, context):
+#         # Save the selected directory path
+#         context.scene.sdg_properties.output_directory = self.filepath
+#         return {'FINISHED'}
 
 
 # ==============================================================================
@@ -76,7 +77,7 @@ class SDG_OT_browse_directory(bpy.types.Operator):
 # Description: Make defined classes available in Blender
 
 classes = [
-    SDG_OT_setup_sdg_scene, SDG_OT_import_tools, SDG_OT_generate_data, SDG_OT_browse_directory
+    SDG_OT_setup_sdg_scene, SDG_OT_import_tools, SDG_OT_generate_data
 ]
 
 def register() -> None:
