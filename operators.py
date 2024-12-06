@@ -12,7 +12,12 @@ class SDG_OT_setup_sdg_scene(bpy.types.Operator):
 
     def  execute(self, context: Context):
         plane_texture_file = context.scene.sdg_properties.plane_texture_file
-        scene_setup.setup_scene(plane_texture_file=plane_texture_file)
+        if not plane_texture_file:
+            current_dir_path = os.path.dirname(os.path.realpath(__file__))
+            plane_texture_path = os.path.join(current_dir_path, "sdg_utils", "misc", "plane_texture.jpeg")
+            scene_setup.setup_scene(plane_texture_file=plane_texture_path)
+        else:
+            scene_setup.setup_scene(plane_texture_file=plane_texture_file)
         self.report({'INFO'}, "Setup scene button clicked!")
         return {'FINISHED'}
 
@@ -23,11 +28,16 @@ class SDG_OT_import_tools(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
     def execute(self, context: Context):
-        #current_dir_path = os.path.dirname(os.path.realpath(__file__))
-        #tools_dir_path = os.path.join(current_dir_path, "sdg_utils", "misc", "tools_dir")
+       
         tools_dir = context.scene.sdg_properties.tools_directory
-        is_sample_tools_present = context.scene.sdg_properties.is_sample_models_present
-        object_import.import_tools(tools_dir=tools_dir, is_sample_tools_present=is_sample_tools_present)
+        if not tools_dir:
+            #if no tools directory is specified we use the sample
+            current_dir_path = os.path.dirname(os.path.realpath(__file__))
+            tools_dir_path = os.path.join(current_dir_path, "sdg_utils", "misc", "tools_dir")
+            object_import.import_tools(tools_dir=tools_dir_path, is_sample_tools_present=True)
+        else:
+            is_sample_tools_present = context.scene.sdg_properties.is_sample_models_present
+            object_import.import_tools(tools_dir=tools_dir, is_sample_tools_present=is_sample_tools_present)
         self.report({'INFO'}, "Import tools button clicked!")
         return {'FINISHED'}
     
