@@ -20,7 +20,7 @@ class SDG_PT_Panel(bpy.types.Panel):
         row = box.row(align=True)
         row.label(text='Plane texture')
         row.prop(context.scene.sdg_properties, 'plane_texture_file', text='')
-        
+
         row = box.row(align=True)
         row.operator('sdg.setup_sdg_scene', text='Setup scene')
 
@@ -28,6 +28,14 @@ class SDG_PT_Panel(bpy.types.Panel):
         # Import tools box
         box = layout.box()
         box.label(text='Import tools')
+
+        row = box.row(align=True)
+        row.label(text="Objects folder")
+        row.prop(context.scene.sdg_properties, 'tools_directory', text='')
+
+        row = box.row(align=True)
+        row.prop(context.scene.sdg_properties, 'is_sample_models_present', text='Do you use the sample?')
+
         row = box.row(align=True)
         row.operator('sdg.import_tools', text='Import tools')
 

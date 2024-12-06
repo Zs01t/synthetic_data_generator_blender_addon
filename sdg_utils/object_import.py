@@ -4,7 +4,7 @@ import re
 from . import my_common
 
 
-def import_tools(tools_dir):
+def import_tools(tools_dir, is_sample_tools_present):
     print("[Started: Importing the tools]")
 
     tool_ref_collection_name = "Tools_reference"
@@ -50,48 +50,49 @@ def import_tools(tools_dir):
             bpy.ops.import_scene.obj(filepath=full_path)
             bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='BOUNDS')
 
-            #we change the materials' values because obj files are limited in storing these informations
-            for slot in bpy.context.selected_objects[0].material_slots:
-                material = slot.material
-                if material and material.name.lower().split(".")[0] == "steel":
-                    # Set the metallic property to 1
-                    if material.node_tree:  # Ensure the material uses nodes
-                        for node in material.node_tree.nodes:
-                            if node.type == 'BSDF_PRINCIPLED':  # Find the Principled BSDF node
-                                node.inputs['Metallic'].default_value = 1.0
-                elif material and material.name.lower().split(".")[0] == "yellow_rubber" or material.name.lower().split(".")[0] == "black_rubber":
+            if is_sample_tools_present:
+                #we change the materials' values because obj files are limited in storing these informations
+                for slot in bpy.context.selected_objects[0].material_slots:
+                    material = slot.material
+                    if material and material.name.lower().split(".")[0] == "steel":
+                        # Set the metallic property to 1
+                        if material.node_tree:  # Ensure the material uses nodes
+                            for node in material.node_tree.nodes:
+                                if node.type == 'BSDF_PRINCIPLED':  # Find the Principled BSDF node
+                                    node.inputs['Metallic'].default_value = 1.0
+                    elif material and material.name.lower().split(".")[0] == "yellow_rubber" or material.name.lower().split(".")[0] == "black_rubber":
 
-                    if material.node_tree:  
-                        for node in material.node_tree.nodes:
-                            if node.type == 'BSDF_PRINCIPLED':
-                                #I'm lazy to do it manually...
-                                if material.name.lower().split(".")[0] == "yellow_rubber":
-                                    node.inputs['Base Color'].default_value = (1, 0.379, 0.008, 1)
-                                elif material.name.lower().split(".")[0] == "black_rubber":
-                                    node.inputs['Base Color'].default_value = (0.003, 0.003, 0.003, 1)
+                        if material.node_tree:  
+                            for node in material.node_tree.nodes:
+                                if node.type == 'BSDF_PRINCIPLED':
+                                    #I'm lazy to do it manually...
+                                    if material.name.lower().split(".")[0] == "yellow_rubber":
+                                        node.inputs['Base Color'].default_value = (1, 0.379, 0.008, 1)
+                                    elif material.name.lower().split(".")[0] == "black_rubber":
+                                        node.inputs['Base Color'].default_value = (0.003, 0.003, 0.003, 1)
 
-                                node.inputs['Specular'].default_value = 0.5
-                                node.inputs['Roughness'].default_value = 0.6
-                                node.inputs['Sheen'].default_value = 0.4
-                                node.inputs['Sheen Tint'].default_value = 0.5
-                                node.inputs['Clearcoat'].default_value = 0.3
-                                # Create and connect Bump and Musgrave Texture nodes
-                                nodes = material.node_tree.nodes
-                                links = material.node_tree.links
+                                    node.inputs['Specular'].default_value = 0.5
+                                    node.inputs['Roughness'].default_value = 0.6
+                                    node.inputs['Sheen'].default_value = 0.4
+                                    node.inputs['Sheen Tint'].default_value = 0.5
+                                    node.inputs['Clearcoat'].default_value = 0.3
+                                    # Create and connect Bump and Musgrave Texture nodes
+                                    nodes = material.node_tree.nodes
+                                    links = material.node_tree.links
 
-                                # Create Musgrave Texture
-                                musgrave_node = nodes.new(type='ShaderNodeTexMusgrave')
-                                musgrave_node.location = (-400, 300)
-                                musgrave_node.inputs['Scale'].default_value = 6
+                                    # Create Musgrave Texture
+                                    musgrave_node = nodes.new(type='ShaderNodeTexMusgrave')
+                                    musgrave_node.location = (-400, 300)
+                                    musgrave_node.inputs['Scale'].default_value = 6
 
-                                # Create Bump Node
-                                bump_node = nodes.new(type='ShaderNodeBump')
-                                bump_node.location = (-200, 300)
-                                bump_node.inputs['Strength'].default_value = 0.1
-                                # Connect Musgrave Texture to Bump Height input
-                                links.new(musgrave_node.outputs['Fac'], bump_node.inputs['Height'])
-                                # Connect Bump Node to Principled BSDF Normal input
-                                links.new(bump_node.outputs['Normal'], node.inputs['Normal'])
+                                    # Create Bump Node
+                                    bump_node = nodes.new(type='ShaderNodeBump')
+                                    bump_node.location = (-200, 300)
+                                    bump_node.inputs['Strength'].default_value = 0.1
+                                    # Connect Musgrave Texture to Bump Height input
+                                    links.new(musgrave_node.outputs['Fac'], bump_node.inputs['Height'])
+                                    # Connect Bump Node to Principled BSDF Normal input
+                                    links.new(bump_node.outputs['Normal'], node.inputs['Normal'])
 
             #in terms of blender context, it is currently inside the selected objects. We iterate over all the selected objects because it may contain multiple parts, but my models are one part only
             for obj in bpy.context.selected_objects:

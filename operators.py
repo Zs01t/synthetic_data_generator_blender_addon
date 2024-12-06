@@ -23,9 +23,11 @@ class SDG_OT_import_tools(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
     def execute(self, context: Context):
-        current_dir_path = os.path.dirname(os.path.realpath(__file__))
-        tools_dir_path = os.path.join(current_dir_path, "sdg_utils", "misc", "tools_dir")
-        object_import.import_tools(tools_dir=tools_dir_path)
+        #current_dir_path = os.path.dirname(os.path.realpath(__file__))
+        #tools_dir_path = os.path.join(current_dir_path, "sdg_utils", "misc", "tools_dir")
+        tools_dir = context.scene.sdg_properties.tools_directory
+        is_sample_tools_present = context.scene.sdg_properties.is_sample_models_present
+        object_import.import_tools(tools_dir=tools_dir, is_sample_tools_present=is_sample_tools_present)
         self.report({'INFO'}, "Import tools button clicked!")
         return {'FINISHED'}
     
