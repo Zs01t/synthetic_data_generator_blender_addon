@@ -71,11 +71,12 @@ class SDG_Properties(bpy.types.PropertyGroup):
         default="",
         subtype='DIR_PATH'
     )
-    is_sample_models_present: bpy.props.BoolProperty(
-        name="is_sample_models_present",
-        description="If True, the it will generate texure nodes for the sample model set",
-        default=False
-    )
+    
+    # is_sample_models_present: bpy.props.BoolProperty(
+    #     name="is_sample_models_present",
+    #     description="If True, the it will generate texure nodes for the sample model set",
+    #     default=False
+    # )
 
     plane_texture_file: bpy.props.StringProperty(
         name = "plane_texture_file",

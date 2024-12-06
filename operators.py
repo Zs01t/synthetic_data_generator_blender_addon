@@ -36,8 +36,7 @@ class SDG_OT_import_tools(bpy.types.Operator):
             tools_dir_path = os.path.join(current_dir_path, "sdg_utils", "misc", "tools_dir")
             object_import.import_tools(tools_dir=tools_dir_path, is_sample_tools_present=True)
         else:
-            is_sample_tools_present = context.scene.sdg_properties.is_sample_models_present
-            object_import.import_tools(tools_dir=tools_dir, is_sample_tools_present=is_sample_tools_present)
+            object_import.import_tools(tools_dir=tools_dir, is_sample_tools_present=False)
         self.report({'INFO'}, "Import tools button clicked!")
         return {'FINISHED'}
     
@@ -55,10 +54,11 @@ class SDG_OT_generate_data(bpy.types.Operator):
         generate_count = context.scene.sdg_properties.generate_count
         min_object_count = context.scene.sdg_properties.min_object_count
         max_object_count = context.scene.sdg_properties.min_object_count
-
-        
+        if not output_dir:
+            data_generation.generate_data(output=bpy.context.scene.render.filepath, generate_count=generate_count, min_object_count=min_object_count, max_object_count=max_object_count)
+        else:
+            data_generation.generate_data(output=output_dir, generate_count=generate_count, min_object_count=min_object_count, max_object_count=max_object_count)
         self.report({'INFO'}, "Generate data button clicked!")
-        data_generation.generate_data(output=output_dir, generate_count=generate_count, min_object_count=min_object_count, max_object_count=max_object_count)
         return {'FINISHED'}
 
 

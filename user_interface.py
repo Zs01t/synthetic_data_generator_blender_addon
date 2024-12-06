@@ -33,8 +33,8 @@ class SDG_PT_Panel(bpy.types.Panel):
         row.label(text="Objects folder")
         row.prop(context.scene.sdg_properties, 'tools_directory', text='')
 
-        row = box.row(align=True)
-        row.prop(context.scene.sdg_properties, 'is_sample_models_present', text='Do you use the sample?')
+        # row = box.row(align=True)
+        # row.prop(context.scene.sdg_properties, 'is_sample_models_present', text='Do you use the sample?')
 
         row = box.row(align=True)
         row.operator('sdg.import_tools', text='Import tools')
