@@ -30,7 +30,8 @@ The mask is an EXR file, which has different channels. To open this file's chann
 The SDG panel consists of 3 main component: 
 ### Setup Scene
 The first is the Setup scene box. Here you change the texture of the plane.
-If you don't specify any image file, it will use the sample one.
+If you don't specify any image file, it will use the sample one in the misc folder.
+You don't need to use this, you can just create a Plane object with its default name.
 
 ### Import Tools
 
@@ -45,7 +46,7 @@ Here is what's inside the Combination Pliers folder:
 
 ![content of combination pliers folder](https://github.com/user-attachments/assets/30fc434b-7532-4d2a-9983-7c5e512c5259)
 
-If you don't specify the the import folder, it will use an example toolset.
+If you don't specify the the import folder, it will use the example toolset in the misc folder.
 
 ### Generate Data
 The last component is the generate data box. Here you can specify how many image-mask pair you want to create, and what is the maximum and minimal number of objects
