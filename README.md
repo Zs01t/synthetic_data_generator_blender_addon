@@ -10,11 +10,11 @@ is avaiable [here.](https://github.com/karolyartur/blender_annotation_tool/tree/
 The add-on also requires the Import-EXport: Wavefront OBJ format add-on version 3.9.0. In theory it is an already
 installed package in this version of Blender, you just need to enable it.
 
-To install the add-on, download the repository as a zip file. Then, in Blender, navigate to Edit>Preferences> Addons and click Install. Select the downloaded zip. 
+To install the add-on, download the repository as a zip file. Then, in Blender, navigate to Edit > Preferences > Addons and click Install. Select the downloaded zip. 
 The addon should then appear in the list of addons (in the Object category). 
 Click the checkbox to activate the addon.
 
-After installation, the addon can be use in the Layout tab's N menu.
+After installation, the addon can be used in the Layout tab's N menu.
 
 
 ![Image showing the SDG Panel at the N Panel](https://github.com/user-attachments/assets/4a9806be-1cc1-44a6-bd73-b3d51ab4abdc)
